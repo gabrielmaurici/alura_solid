@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Alura.LeilaoOnline.WebApp.Dados
+namespace Alura.LeilaoOnline.WebApp.Dados.EfCore
 {
-    public class LeilaoDao
+    public class LeilaoDaoComEfCore : ILeilaoDao
     {
         AppDbContext _context;
 
-        public LeilaoDao()
+        public LeilaoDaoComEfCore()
         {
             _context = new AppDbContext();
         }
@@ -30,5 +30,24 @@ namespace Alura.LeilaoOnline.WebApp.Dados
         {
             return _context.Leiloes.First(x => x.Id == id);
         }
+
+        public void Incluir(Leilao leilao)
+        {
+            _context.Leiloes.Add(leilao);
+            _context.SaveChanges();
+        }
+
+        public void Alterar(Leilao leilao)
+        {
+            _context.Leiloes.Update(leilao);
+            _context.SaveChanges();
+        }
+
+        public void Excluir(Leilao leilao)
+        {
+            _context.Leiloes.Remove(leilao);
+            _context.SaveChanges();
+        }
+
     }
 }
