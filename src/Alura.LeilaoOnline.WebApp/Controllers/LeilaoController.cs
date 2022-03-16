@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Alura.LeilaoOnline.WebApp.Models;
 using System;
 using Alura.LeilaoOnline.WebApp.Dados;
-using Alura.LeilaoOnline.WebApp.Dados.EfCore;
 
 namespace Alura.LeilaoOnline.WebApp.Controllers
 {
@@ -11,12 +10,11 @@ namespace Alura.LeilaoOnline.WebApp.Controllers
     [Route("/api/leiloes")]
     public class LeilaoController : Controller
     {
-
         ILeilaoDao _leilaoDao;
 
-        public LeilaoController()
+        public LeilaoController(ILeilaoDao leilaoDao)
         {
-            _leilaoDao = new LeilaoDaoComEfCore();
+            _leilaoDao = leilaoDao;
         }
 
         public IActionResult Index()
